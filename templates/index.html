@@ -1,70 +1,251 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>SAP Extractor</title>
-</head>
 
-<body>
+    <link rel="stylesheet" href="/static/style.css?v=1" />
+  </head>
 
-<h2>SAP DATA EXTRACTOR</h2>
+  <body>
+    <div class="container">
+      <h2>SAP DATA EXTRACTOR</h2>
 
-<label>Usuario SAP</label><br>
-<input id="usuario"><br><br>
+      <label>Usuario SAP</label>
+      <input id="usuario" />
 
-<label>Password SAP</label><br>
-<input id="password" type="password"><br><br>
+      <label>Password SAP</label>
+      <input id="password" type="password" />
 
-<label>Tabla</label><br>
-<input id="tabla" value="ZSDVTACOM1"><br><br>
+      <label>Tabla</label>
+      <input id="tabla" value="ZSDVTACOM1" />
 
-<label>Año</label><br>
-<input id="anio" value="2017"><br><br>
+      <label>Año</label>
+      <input id="anio" placeholder="2017" />
 
-<button onclick="extraer()">Extraer Datos</button>
+      <label>Modo de extracción</label>
 
-<p id="resultado"></p>
+      <div class="modo-selector">
+        <label class="modo-opcion">
+          <input
+            type="radio"
+            name="modo"
+            value="anio"
+            checked
+            onclick="cambiarModo()"
+          />
+          <span>Año completo</span>
+        </label>
 
-<script>
+        <label class="modo-opcion">
+          <input type="radio" name="modo" value="mes" onclick="cambiarModo()" />
+          <span>Un mes</span>
+        </label>
 
-async function extraer(){
+        <label class="modo-opcion">
+          <input
+            type="radio"
+            name="modo"
+            value="rango"
+            onclick="cambiarModo()"
+          />
+          <span>Rango</span>
+        </label>
+      </div>
 
-    console.log("Botón presionado")
+      <div id="mes_container" style="display: none">
+        <label>Mes</label>
+        <input id="mes" type="number" min="1" max="12" placeholder="3" />
+      </div>
 
-    let usuario = document.getElementById("usuario").value
-    let password = document.getElementById("password").value
-    let tabla = document.getElementById("tabla").value
-    let anio = document.getElementById("anio").value
+      <div id="rango_container" style="display: none">
+        <label>Mes inicio</label>
+        <input id="mes_inicio" type="number" min="1" max="12" placeholder="1" />
 
-    console.log(usuario, password, tabla, anio)
+        <label>Mes fin</label>
+        <input id="mes_fin" type="number" min="1" max="12" placeholder="6" />
+      </div>
+      <div class="botones">
+        <button id="btn_extraer" onclick="extraer()">Extraer Datos</button>
+        <button type="button" onclick="verHistorial()">Ver Historial</button>
+      </div>
+      <div class="progress-container">
+        <div id="barra_progreso">
+          <span id="porcentaje">0%</span>
+        </div>
+      </div>
 
-    document.getElementById("resultado").innerText = "Ejecutando extracción..."
+      <p id="resultado"></p>
+      <div id="historial_container"></div>
+    </div>
 
-    let url = `/sap/historico?tabla=${tabla}&anio=${anio}&usuario=${usuario}&password=${password}`
+    <script>
+      function cambiarModo() {
+        let modo = document.querySelector('input[name="modo"]:checked').value;
 
-    console.log("URL:", url)
+        let mes = document.getElementById("mes_container");
+        let rango = document.getElementById("rango_container");
 
-    try{
+        mes.style.display = "none";
+        rango.style.display = "none";
 
-        let res = await fetch(url)
+        if (modo === "mes") {
+          mes.style.display = "block";
+        }
 
-        let data = await res.json()
+        if (modo === "rango") {
+          rango.style.display = "block";
+        }
+      }
 
-        console.log(data)
+      async function extraer() {
+        let usuario = document.getElementById("usuario").value;
+        let password = document.getElementById("password").value;
+        let tabla = document.getElementById("tabla").value;
+        let anio = document.getElementById("anio").value;
+        let boton = document.getElementById("btn_extraer");
+        let resultado = document.getElementById("resultado");
 
-        document.getElementById("resultado").innerText =
-        "Registros insertados: " + data.registros_insertados
+        let barra = document.getElementById("barra_progreso");
+        let porcentaje = document.getElementById("porcentaje");
 
-    }catch(error){
+        let modo = document.querySelector('input[name="modo"]:checked').value;
 
-        console.error(error)
+        barra.style.width = "0%";
+        if (porcentaje) porcentaje.innerText = "0%";
 
-        document.getElementById("resultado").innerText =
-        "Error ejecutando extracción"
-    }
+        if (!usuario || !password) {
+          resultado.innerText = "⚠️ Debe ingresar usuario y password SAP";
+          return;
+        }
 
-}
+        if (!anio) {
+          resultado.innerText = "⚠️ Debe ingresar el año";
+          return;
+        }
 
-</script>
+        boton.disabled = true;
 
-</body>
+        let url = "";
+
+        if (modo === "anio") {
+          url = `/sap/progreso?tabla=${tabla}&anio=${anio}&usuario=${usuario}&password=${password}`;
+        }
+
+        if (modo === "mes") {
+          let mes = document.getElementById("mes").value;
+
+          if (!mes) {
+            resultado.innerText = "⚠️ Debe ingresar el mes";
+            boton.disabled = false;
+            return;
+          }
+
+          url = `/sap/progreso-mes?tabla=${tabla}&anio=${anio}&mes=${mes}&usuario=${usuario}&password=${password}`;
+        }
+
+        if (modo === "rango") {
+          let mes_inicio = document.getElementById("mes_inicio").value;
+          let mes_fin = document.getElementById("mes_fin").value;
+
+          if (!mes_inicio || !mes_fin) {
+            resultado.innerText = "⚠️ Debe ingresar ambos meses";
+            boton.disabled = false;
+            return;
+          }
+
+          url = `/sap/progreso-rango?tabla=${tabla}&anio=${anio}&mes_inicio=${mes_inicio}&mes_fin=${mes_fin}&usuario=${usuario}&password=${password}`;
+        }
+
+        resultado.innerText = "⏳ Conectando con SAP...";
+
+        const evento = new EventSource(url);
+
+        evento.onmessage = function (event) {
+          let data = JSON.parse(event.data);
+
+          if (data.progreso) {
+            barra.style.width = data.progreso + "%";
+
+            if (porcentaje) {
+              porcentaje.innerText = data.progreso + "%";
+            }
+
+            resultado.innerText = "📥 Leyendo datos de SAP...";
+          }
+
+          if (data.fin) {
+            barra.style.width = "100%";
+
+            if (porcentaje) {
+              porcentaje.innerText = "100%";
+            }
+
+            resultado.innerText = "✅ Registros insertados: " + data.registros;
+
+            boton.disabled = false;
+
+            evento.close();
+          }
+        };
+
+        evento.onerror = function () {
+          resultado.innerText = "❌ Error en extracción";
+
+          boton.disabled = false;
+
+          evento.close();
+        };
+      }
+
+      async function verHistorial() {
+        let container = document.getElementById("historial_container");
+
+        container.innerHTML = "⏳ Cargando historial...";
+
+        try {
+          let res = await fetch("/historial");
+
+          let data = await res.json();
+
+          let tabla = `
+    <h3>Historial de Extracciones</h3>
+    <table border="1">
+    <tr>
+      <th>Fecha</th>
+      <th>Usuario</th>
+      <th>Tabla</th>
+      <th>Año</th>
+      <th>Modo</th>
+      <th>Mes Inicio</th>
+      <th>Mes Fin</th>
+      <th>Registros</th>
+      <th>Estado</th>
+    </tr>
+    `;
+
+          data.forEach((item) => {
+            tabla += `
+      <tr>
+        <td>${item.fecha}</td>
+        <td>${item.usuario_sap}</td>
+        <td>${item.tabla}</td>
+        <td>${item.anio}</td>
+        <td>${item.modo}</td>
+        <td>${item.mes_inicio ?? ""}</td>
+        <td>${item.mes_fin ?? ""}</td>
+        <td>${item.registros_insertados}</td>
+        <td>${item.estado}</td>
+      </tr>
+      `;
+          });
+
+          tabla += "</table>";
+
+          container.innerHTML = tabla;
+        } catch (error) {
+          container.innerHTML = "❌ Error cargando historial";
+        }
+      }
+    </script>
+  </body>
 </html>

@@ -233,59 +233,31 @@ def leer_tabla_por_anio(tabla, anio, usuario, password):
 
     conn = conectar_sap(usuario, password)
 
-    print("Leyendo grupo 1...")
-    datos1 = leer_grupo(conn, tabla, anio, campos_1)
+    grupos = [
+        campos_1, campos_2, campos_3, campos_4,
+        campos_5, campos_6, campos_7, campos_8,
+        campos_9, campos_10, campos_11, campos_12
+    ]
 
-    print("Leyendo grupo 2...")
-    datos2 = leer_grupo(conn, tabla, anio, campos_2)
+    datos_grupos = []
+    total_grupos = len(grupos)
 
-    print("Leyendo grupo 3...")
-    datos3 = leer_grupo(conn, tabla, anio, campos_3)
+    for i, grupo in enumerate(grupos):
 
-    print("Leyendo grupo 4...")
-    datos4 = leer_grupo(conn, tabla, anio, campos_4)
+        print(f"Leyendo grupo {i+1}...")
 
-    print("Leyendo grupo 5...")
-    datos5 = leer_grupo(conn, tabla, anio, campos_5)
-    
-    print("Leyendo grupo 6...")
-    datos6 = leer_grupo(conn, tabla, anio, campos_6)
-    print("Leyendo grupo 7...")
-    datos7 = leer_grupo(conn, tabla, anio, campos_7)
-    print("Leyendo grupo 8...")
-    datos8 = leer_grupo(conn, tabla, anio, campos_8)
-    print("Leyendo grupo 9...")
-    datos9 = leer_grupo(conn, tabla, anio, campos_9)
-    print("Leyendo grupo 10...")
-    datos10 = leer_grupo(conn, tabla, anio, campos_10)
-    print("Leyendo grupo 11...")
-    datos11 = leer_grupo(conn, tabla, anio, campos_11)
-    print("Leyendo grupo 12...")
-    datos12 = leer_grupo(conn, tabla, anio, campos_12)
+        datos = leer_grupo(conn, tabla, anio, grupo)
 
-    datos_finales = []
-    
+        datos_grupos.append(datos)
 
-    for i in range(len(datos1)):
+        progreso = int(((i + 1) / total_grupos) * 100)
 
-        fila = (
-            datos1[i] + ";" +
-            datos2[i] + ";" +
-            datos3[i] + ";" +
-            datos4[i] + ";" +
-            datos5[i] + ";" +
-            datos6[i] + ";" +
-            datos7[i] + ";" +
-            datos8[i] + ";" +
-            datos9[i] + ";" +
-            datos10[i] + ";" +
-            datos11[i] + ";" +
-            datos12[i] + ";"
-        )
-
-        datos_finales.append(fila)
-
-    return datos_finales
+        yield {
+            "progreso": progreso,
+            "grupo": i + 1,
+            "total_grupos": total_grupos,
+            "datos": datos_grupos if i == total_grupos - 1 else None
+        }
 
 def leer_grupo_mes(conn, tabla, anio, mes, campos, batch=500):
 
