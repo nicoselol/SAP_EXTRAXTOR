@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SAP Extractor</title>
+</head>
+
+<body>
+
+<h2>SAP DATA EXTRACTOR</h2>
+
+<label>Usuario SAP</label><br>
+<input id="usuario"><br><br>
+
+<label>Password SAP</label><br>
+<input id="password" type="password"><br><br>
+
+<label>Tabla</label><br>
+<input id="tabla" value="ZSDVTACOM1"><br><br>
+
+<label>Año</label><br>
+<input id="anio" value="2017"><br><br>
+
+<button onclick="extraer()">Extraer Datos</button>
+
+<p id="resultado"></p>
+
+<script>
+
+async function extraer(){
+
+    console.log("Botón presionado")
+
+    let usuario = document.getElementById("usuario").value
+    let password = document.getElementById("password").value
+    let tabla = document.getElementById("tabla").value
+    let anio = document.getElementById("anio").value
+
+    console.log(usuario, password, tabla, anio)
+
+    document.getElementById("resultado").innerText = "Ejecutando extracción..."
+
+    let url = `/sap/historico?tabla=${tabla}&anio=${anio}&usuario=${usuario}&password=${password}`
+
+    console.log("URL:", url)
+
+    try{
+
+        let res = await fetch(url)
+
+        let data = await res.json()
+
+        console.log(data)
+
+        document.getElementById("resultado").innerText =
+        "Registros insertados: " + data.registros_insertados
+
+    }catch(error){
+
+        console.error(error)
+
+        document.getElementById("resultado").innerText =
+        "Error ejecutando extracción"
+    }
+
+}
+
+</script>
+
+</body>
+</html>

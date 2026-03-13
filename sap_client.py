@@ -5,15 +5,18 @@ from pyrfc import Connection
 
 load_dotenv()
 
-def get_connection():
+def conectar_sap(usuario, password):
 
     conn = Connection(
-        user=os.getenv("SAP_USER"),
-        passwd=os.getenv("SAP_PASS"),
+
+        user=usuario,
+        passwd=password,
+
         ashost=os.getenv("SAP_ASHOST"),
         sysnr=os.getenv("SAP_SYSNR"),
         client=os.getenv("SAP_CLIENT"),
-        lang=os.getenv("SAP_LANG"),
+        lang=os.getenv("SAP_LANG")
+
     )
 
     return conn

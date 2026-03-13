@@ -563,3 +563,139 @@ Global trace level        : 0
 	0x7FFC60E07360: KERNEL32.DLL!BaseThreadInitThunk()
 	0x7FFC625DCC70: ntdll.dll!RtlUserThreadStart()
 
+
+**** Log file opened at 2026-03-11 09:47:17.774937 UTC-05:00 (Hora est. Pacífico, Sudamérica), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 14
+Compilation date          : Jun 15 2024 06:07:33
+CPIC library              : 754.2024.02.29 version 3
+NI library                : 40
+Kernel Release            : 754 Patch Level 325
+Current working directory : C:\sap_extractor
+Program                   : python
+Process ID                : 09952
+User                      : atecnologia2
+Hardware                  : PC with Windows NT 4x AMD64 Level 6 (Mod 58 Step 9)
+Binary Type               : 64bit
+Operating_system          : Windows NT 10.0
+Hostname                  : AV68_COME_AR
+IP address                : 192.168.8.58
+IPv6 address              : fe80::35fe:8fe6:603:c17a
+Global trace level        : 0
+
+2026-03-11 09:47:17.774524 [05616] >> Info entry
+	throwRfcErrorMsg called at:
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DAC1E0: sapnwrfc.dll!RfcInvoke()
+	0x7FF905DAC1E0: _cyrfc.cp310-win_amd64.pyd!RfcInvoke()
+	0x7FF905DAC1E0: _cyrfc.cp310-win_amd64.pyd!RfcInvoke()
+	0x7FF90A9BD114: python310.dll!Py_gitversion()
+	0x7FF90A8B4950: python310.dll!PyFunction_Vectorcall()
+	0x7FF90A8B58A0: python310.dll!PyEval_EvalFrameDefault()
+	0x7FF90A8B4950: python310.dll!PyFunction_Vectorcall()
+	0x7FF90A8B58A0: python310.dll!PyEval_EvalFrameDefault()
+	0x7FF90A8B4950: python310.dll!PyFunction_Vectorcall()
+	0x7FF90A89BF54: python310.dll!PyVectorcall_Call()
+	0x7FF90A89BD44: python310.dll!PyObject_Call()
+	0x7FF90A961C88: python310.dll!Py_Exit()
+	0x7FF90A89FE58: python310.dll!PyObject_MakeTpCall()
+	0x7FF90A9609FC: python310.dll!Py_HandleSystemExit()
+	0x7FF90AA63C4C: python310.dll!PyContext_NewHamtForTests()
+	0x7FF90AA63C4C: python310.dll!PyContext_NewHamtForTests()
+	0x7FF90A8741B0: python310.dll!PyArg_CheckPositional()
+	0x7FF90A89BF54: python310.dll!PyVectorcall_Call()
+	0x7FF90A89BD44: python310.dll!PyObject_Call()
+	0x7FF90A89BD44: python310.dll!PyObject_Call()
+	0x7FF90A8B58A0: python310.dll!PyEval_EvalFrameDefault()
+	0x7FF90A8B58A0: python310.dll!PyEval_EvalFrameDefault()
+	0x7FF90A8B58A0: python310.dll!PyEval_EvalFrameDefault()
+	0x7FF90A8B4950: python310.dll!PyFunction_Vectorcall()
+	0x7FF90A8B25C0: python310.dll!PyObject_GC_Malloc()
+	0x7FF90A89BF54: python310.dll!PyVectorcall_Call()
+	0x7FF90A89BD44: python310.dll!PyObject_Call()
+	0x7FF90A928370: python310.dll!PyRuntimeState_Fini()
+	0x7FF90A928370: python310.dll!PyRuntimeState_Fini()
+	0x7FF9706E1B20: ucrtbase.dll!configthreadlocale()
+	0x7FF971817360: KERNEL32.DLL!BaseThreadInitThunk()
+	0x7FF972B7CC70: ntdll.dll!RtlUserThreadStart()
+
+2026-03-11 09:47:17.901001 [05616] >> Error entry
+	[Handle: 1885271411728	ConvID: 78107379	Target: cgaqas	SysID: CGQ	SysNr: 00	User: FORJA	Client: 300	Language: S	Codepage: 4103]
+	RfcSystemException: Key: ASSIGN_CASTING_UNKNOWN_TYPE, Code: RFC_ABAP_RUNTIME_FAILURE, Message: The specified type Typ zsdvtacom1 is unknown.
+
+**** Log file opened at 2026-03-11 15:40:34.058735 UTC-05:00 (Hora est. Pacífico, Sudamérica), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 14
+Compilation date          : Jun 15 2024 06:07:33
+CPIC library              : 754.2024.02.29 version 3
+NI library                : 40
+Kernel Release            : 754 Patch Level 325
+Current working directory : C:\sap_extractor
+Program                   : python
+Process ID                : 14256
+User                      : atecnologia2
+Hardware                  : PC with Windows NT 4x AMD64 Level 6 (Mod 58 Step 9)
+Binary Type               : 64bit
+Operating_system          : Windows NT 10.0
+Hostname                  : AV68_COME_AR
+IP address                : 192.168.8.58
+IPv6 address              : fe80::35fe:8fe6:603:c17a
+Global trace level        : 0
+
+2026-03-11 15:40:34.058276 [05144] >> Info entry
+	throwRfcErrorMsg called at:
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DE93D0: sapnwrfc.dll!RfcSetAbapObjectByIndex()
+	0x7FF905DA5980: sapnwrfc.dll!RfcOpenConnection()
+	0x7FF905DA5980: _cyrfc.cp310-win_amd64.pyd!RfcOpenConnection()
+	0x7FF905DA5980: _cyrfc.cp310-win_amd64.pyd!RfcOpenConnection()
+	0x7FF905DA5980: _cyrfc.cp310-win_amd64.pyd!RfcOpenConnection()
+	0x7FF90A8AED90: python310.dll!PyType_GenericNew()
+	0x7FF90A89FE58: python310.dll!PyObject_MakeTpCall()
+	0x7FF90A8B58A0: python310.dll!PyEval_EvalFrameDefault()
+	0x7FF90A8B4950: python310.dll!PyFunction_Vectorcall()
+	0x7FF90A8B58A0: python310.dll!PyEval_EvalFrameDefault()
+	0x7FF90A8B4950: python310.dll!PyFunction_Vectorcall()
+	0x7FF90A8B58A0: python310.dll!PyEval_EvalFrameDefault()
+	0x7FF90A8B4950: python310.dll!PyFunction_Vectorcall()
+	0x7FF90A89BF54: python310.dll!PyVectorcall_Call()
+	0x7FF90A89BD44: python310.dll!PyObject_Call()
+	0x7FF90A961C88: python310.dll!Py_Exit()
+	0x7FF90A89FE58: python310.dll!PyObject_MakeTpCall()
+	0x7FF90A9609FC: python310.dll!Py_HandleSystemExit()
+	0x7FF90AA63C4C: python310.dll!PyContext_NewHamtForTests()
+	0x7FF90AA63C4C: python310.dll!PyContext_NewHamtForTests()
+	0x7FF90A8741B0: python310.dll!PyArg_CheckPositional()
+	0x7FF90A89BF54: python310.dll!PyVectorcall_Call()
+	0x7FF90A89BD44: python310.dll!PyObject_Call()
+	0x7FF90A89BD44: python310.dll!PyObject_Call()
+	0x7FF90A8B58A0: python310.dll!PyEval_EvalFrameDefault()
+	0x7FF90A8B58A0: python310.dll!PyEval_EvalFrameDefault()
+	0x7FF90A8B58A0: python310.dll!PyEval_EvalFrameDefault()
+	0x7FF90A8B4950: python310.dll!PyFunction_Vectorcall()
+	0x7FF90A8B25C0: python310.dll!PyObject_GC_Malloc()
+	0x7FF90A89BF54: python310.dll!PyVectorcall_Call()
+	0x7FF90A89BD44: python310.dll!PyObject_Call()
+	0x7FF90A928370: python310.dll!PyRuntimeState_Fini()
+	0x7FF90A928370: python310.dll!PyRuntimeState_Fini()
+	0x7FF9706E1B20: ucrtbase.dll!configthreadlocale()
+	0x7FF971817360: KERNEL32.DLL!BaseThreadInitThunk()
+	0x7FF972B7CC70: ntdll.dll!RtlUserThreadStart()
+
+2026-03-11 15:40:34.218635 [05144] >> Error entry
+	[Handle: 2556226832160	ConvID: 99420710	Target: 192.168.9.109	SysID: CGQ	SysNr: 00	User: forja	Client: 300	Language: S	Codepage: 4103]
+	RfcLogonException: Key: RFC_LOGON_FAILURE, Code: RFC_LOGON_FAILURE, Message: Nombre o clave de acceso incorrectos (repita la entrada al sistema)

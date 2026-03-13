@@ -1,4 +1,4 @@
-from sap_client import get_connection
+from sap_client import conectar_sap
 
 
 # -------------------------------
@@ -229,9 +229,9 @@ def leer_grupo(conn, tabla, anio, campos, batch=500):
 # FUNCION PRINCIPAL
 # -------------------------------
 
-def leer_tabla_por_anio(tabla, anio):
+def leer_tabla_por_anio(tabla, anio, usuario, password):
 
-    conn = get_connection()
+    conn = conectar_sap(usuario, password)
 
     print("Leyendo grupo 1...")
     datos1 = leer_grupo(conn, tabla, anio, campos_1)
@@ -316,9 +316,8 @@ def leer_grupo_mes(conn, tabla, anio, mes, campos, batch=500):
 
     return datos
 
-def leer_tabla_por_mes(tabla, anio, mes):
-
-    conn = get_connection()
+def leer_tabla_por_mes(tabla, anio, mes, usuario, password):
+    conn = conectar_sap(usuario, password)
 
     print("Leyendo grupo 1...")
     datos1 = leer_grupo_mes(conn, tabla, anio, mes, campos_1)
@@ -410,9 +409,9 @@ def leer_grupo_rango(conn, tabla, anio, mes_inicio, mes_fin, campos, batch=500):
 
     return datos
 
-def leer_tabla_por_rango(tabla, anio, mes_inicio, mes_fin):
+def leer_tabla_por_rango(tabla, anio, mes_inicio, mes_fin, usuario, password):
 
-    conn = get_connection()
+    conn = conectar_sap(usuario, password)
 
     print("Leyendo grupo 1...")
     datos1 = leer_grupo_rango(conn, tabla, anio, mes_inicio, mes_fin, campos_1)
