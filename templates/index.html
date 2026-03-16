@@ -1,153 +1,142 @@
 <!doctype html>
 <html>
-<head>
-<title>SAP Extractor</title>
+  <head>
+    <title>SAP Extractor</title>
 
-<link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/style.css" />
 
-<style>
+    <style>
+      body {
+        font-family: Arial;
+        background: #f4f6f9;
+      }
 
-body{
-    font-family: Arial;
-    background:#f4f6f9;
-}
+      .top-bar {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        padding: 20px;
+      }
 
-.top-bar{
-    width:100%;
-    display:flex;
-    justify-content:flex-end;
-    padding:20px;
-}
+      .btn-historial {
+        background: #2c3e50;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+      }
 
-.btn-historial{
-    background:#2c3e50;
-    color:white;
-    border:none;
-    padding:10px 18px;
-    border-radius:6px;
-    cursor:pointer;
-    font-size:14px;
-}
+      .btn-historial:hover {
+        background: #1a252f;
+      }
 
-.btn-historial:hover{
-    background:#1a252f;
-}
+      .container {
+        width: 400px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      }
 
-.container{
-    width:400px;
-    margin:auto;
-    background:white;
-    padding:30px;
-    border-radius:10px;
-    box-shadow:0px 2px 10px rgba(0,0,0,0.1);
-}
+      h2 {
+        text-align: center;
+        margin-bottom: 25px;
+      }
 
-h2{
-    text-align:center;
-    margin-bottom:25px;
-}
+      label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+      }
 
-label{
-    display:block;
-    margin-top:10px;
-    font-weight:bold;
-}
+      input,
+      select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
 
-input, select{
-    width:100%;
-    padding:8px;
-    margin-top:5px;
-    border:1px solid #ccc;
-    border-radius:5px;
-}
+      button {
+        width: 100%;
+        margin-top: 20px;
+        padding: 10px;
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 15px;
+      }
 
-button{
-    width:100%;
-    margin-top:20px;
-    padding:10px;
-    background:#3498db;
-    color:white;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
-    font-size:15px;
-}
+      button:hover {
+        background: #2980b9;
+      }
 
-button:hover{
-    background:#2980b9;
-}
+      #resultado {
+        margin-top: 15px;
+        text-align: center;
+      }
+    </style>
+  </head>
 
-#resultado{
-    margin-top:15px;
-    text-align:center;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="top-bar">
-    <a href="/historial">
+  <body>
+    <div class="top-bar">
+      <a href="/historial">
         <button class="btn-historial">📊 Ver historial de extracciones</button>
-    </a>
-</div>
+      </a>
+    </div>
 
-<div class="container">
+    <div class="container">
+      <h2>SAP DATA EXTRACTOR</h2>
 
-<h2>SAP DATA EXTRACTOR</h2>
+      <label>Usuario SAP</label>
+      <input id="usuario" />
 
-<label>Usuario SAP</label>
-<input id="usuario" />
+      <label>Password SAP</label>
+      <input id="password" type="password" />
 
-<label>Password SAP</label>
-<input id="password" type="password" />
+      <label>Entorno SAP</label>
+      <select id="entorno">
+        <option value="prod">Productivo</option>
+        <option value="qa">Calidad</option>
+      </select>
 
-<label>Entorno SAP</label>
-<select id="entorno">
-<option value="prod">Productivo</option>
-<option value="qa">Calidad</option>
-</select>
+      <label>Tabla</label>
+      <input id="tabla" value="ZSDVTACOM1" />
 
-<label>Tabla</label>
-<input id="tabla" value="ZSDVTACOM1" />
+      <label>Año</label>
+      <input id="anio" value="2017" />
 
-<label>Año</label>
-<input id="anio" value="2017" />
+      <label>Modo extracción</label>
+      <select id="modo" onchange="cambiarModo()">
+        <option value="anio">Por año</option>
+        <option value="mes">Por mes</option>
+        <option value="rango">Rango de meses</option>
+      </select>
 
-<label>Modo extracción</label>
-<select id="modo" onchange="cambiarModo()">
-<option value="anio">Por año</option>
-<option value="mes">Por mes</option>
-<option value="rango">Rango de meses</option>
-</select>
+      <div id="mesDiv" style="display: none">
+        <label>Mes</label>
+        <input id="mes" placeholder="01" />
+      </div>
 
-<div id="mesDiv" style="display:none">
+      <div id="rangoDiv" style="display: none">
+        <label>Mes inicio</label>
+        <input id="mes_inicio" placeholder="01" />
 
-<label>Mes</label>
-<input id="mes" placeholder="01" />
+        <label>Mes fin</label>
+        <input id="mes_fin" placeholder="12" />
+      </div>
 
-</div>
+      <button onclick="extraer()">Extraer Datos</button>
 
-<div id="rangoDiv" style="display:none">
+      <p id="resultado"></p>
+    </div>
 
-<label>Mes inicio</label>
-<input id="mes_inicio" placeholder="01" />
-
-<label>Mes fin</label>
-<input id="mes_fin" placeholder="12" />
-
-</div>
-
-<button onclick="extraer()">Extraer Datos</button>
-
-<p id="resultado"></p>
-
-</div>
-
-<script src="/static/app.js"></script>
-
-</body>
+    <script src="/static/app.js"></script>
+  </body>
 </html>
-
