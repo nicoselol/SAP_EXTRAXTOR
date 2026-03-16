@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Historial SAP</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#f4f6f9;
+margin:40px;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+h2{
+margin:0;
+}
+
+.btn-volver{
+background:#3498db;
+color:white;
+border:none;
+padding:10px 18px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.btn-volver:hover{
+background:#2980b9;
+}
+
+table{
+border-collapse: collapse;
+width:100%;
+background:white;
+box-shadow:0px 2px 8px rgba(0,0,0,0.1);
+}
+
+th,td{
+padding:10px;
+border-bottom:1px solid #ddd;
+text-align:center;
+}
+
+th{
+background:#34495e;
+color:white;
+}
+
+.estado-ok{
+color:green;
+font-weight:bold;
+}
+
+.estado-error{
+color:red;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h2>📊 Historial de extracciones SAP</h2>
+
+<a href="/">
+<button class="btn-volver">⬅ Volver</button>
+</a>
+
+</div>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Fecha</th>
+<th>Usuario</th>
+<th>Tabla</th>
+<th>Año</th>
+<th>Modo</th>
+<th>Mes inicio</th>
+<th>Mes fin</th>
+<th>Registros</th>
+<th>Estado</th>
+</tr>
+
+{% for fila in datos %}
+
+<tr>
+<td>{{fila.id}}</td>
+<td>{{fila.fecha}}</td>
+<td>{{fila.usuario_sap}}</td>
+<td>{{fila.tabla}}</td>
+<td>{{fila.anio}}</td>
+<td>{{fila.modo}}</td>
+
+<td>{{fila.mes_inicio or "-"}}</td>
+<td>{{fila.mes_fin or "-"}}</td>
+
+<td>{{fila.registros_insertados}}</td>
+
+<td>
+{% if fila.estado == "OK" %}
+<span class="estado-ok">✔ OK</span>
+{% else %}
+<span class="estado-error">✖ ERROR</span>
+{% endif %}
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>

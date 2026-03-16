@@ -1,5 +1,5 @@
 import mysql.connector
-
+from datetime import datetime
 
 def get_mysql_connection():
 
@@ -95,4 +95,38 @@ def guardar_datos(anio, datos):
             print(c)
 
     cursor.close()
+    conn.close()
+    
+def guardar_historial(usuario, tabla, anio, modo, mes_inicio, mes_fin, registros, estado):
+
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="",
+        database="aitv_com"
+    )
+
+    cursor = conn.cursor()
+
+    sql = """
+    INSERT INTO historial_extracciones
+    (fecha, usuario_sap, tabla, anio, modo, mes_inicio, mes_fin, registros_insertados, estado)
+    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
+    """
+
+    valores = (
+        datetime.now(),
+        usuario,
+        tabla,
+        anio,
+        modo,
+        mes_inicio,
+        mes_fin,
+        registros,
+        estado
+    )
+
+    cursor.execute(sql, valores)
+
+    conn.commit()
     conn.close()
