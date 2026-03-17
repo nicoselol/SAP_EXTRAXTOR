@@ -217,7 +217,7 @@ def ver_historial(request: Request):
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="",
+        password="jVilN(lH)KrC7=qR5TXC8F",
         database="aitv_com"  # tu base real
     )
 

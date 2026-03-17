@@ -6,7 +6,7 @@ def get_mysql_connection():
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="",
+        password="jVilN(lH)KrC7=qR5TXC8F",
         database="aitv_com",
         charset="utf8mb4",
         collation="utf8mb4_unicode_ci"
@@ -102,7 +102,7 @@ def guardar_historial(usuario, tabla, anio, modo, mes_inicio, mes_fin, registros
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="",
+        password="jVilN(lH)KrC7=qR5TXC8F",
         database="aitv_com"
     )
 
