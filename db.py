@@ -1,3 +1,32 @@
+"""
+===============================================================================
+Archivo: db.py
+
+Descripción:
+Este archivo se encarga de administrar la conexión con la base de datos MySQL
+y de almacenar la información extraída desde SAP.
+
+Funcionalidades principales:
+- Establece la conexión con la base de datos MySQL.
+- Elimina los registros existentes correspondientes al año que se va a cargar,
+  evitando duplicados.
+- Procesa los datos obtenidos desde SAP antes de almacenarlos.
+- Convierte los campos de fecha del formato SAP (YYYYMMDD) al formato
+  compatible con MySQL (YYYY-MM-DD).
+- Inserta los registros en la tabla 'zsdvtacom1'.
+- Confirma la transacción y cierra la conexión con la base de datos.
+
+Flujo general:
+1. Se establece la conexión con MySQL.
+2. Se eliminan los registros del año seleccionado.
+3. Se preparan las columnas y la consulta de inserción.
+4. Se procesa cada registro recibido desde SAP.
+5. Se realizan las conversiones necesarias (por ejemplo, fechas).
+6. Se insertan los registros en la base de datos.
+7. Se confirma la transacción y se libera la conexión.
+
+===============================================================================
+"""
 import mysql.connector
 
 
