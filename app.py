@@ -1,3 +1,38 @@
+"""
+===============================================================================
+Archivo: main.py
+
+Descripción:
+Este archivo es el punto de entrada de la aplicación desarrollada con FastAPI.
+Su función principal es exponer los diferentes endpoints que permiten realizar
+extracciones de información desde SAP, almacenar los datos obtenidos en la base
+de datos y registrar el historial de cada extracción realizada.
+
+Funcionalidades principales:
+- Inicializa la aplicación FastAPI.
+- Sirve la interfaz web (index.html) y los archivos estáticos.
+- Permite extraer información de SAP por:
+    * Año.
+    * Mes.
+    * Rango de meses.
+- Envía el progreso de la extracción en tiempo real mediante
+  Server-Sent Events (StreamingResponse).
+- Guarda la información extraída en la base de datos.
+- Registra en el historial el resultado de cada extracción
+  (exitosa o con error).
+- Expone un endpoint para consultar las últimas extracciones realizadas.
+
+Flujo general:
+1. El usuario realiza una solicitud desde la interfaz web.
+2. Se consulta la información en SAP.
+3. Los datos obtenidos son procesados y consolidados.
+4. La información se almacena en la base de datos.
+5. Se registra la operación en el historial.
+6. Se devuelve la respuesta al usuario.
+
+===============================================================================
+"""
+
 from fastapi import FastAPI
 from historial import guardar_historial
 from sap_reader import leer_tabla_por_anio, leer_tabla_por_mes
