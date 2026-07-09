@@ -1,3 +1,27 @@
+"""
+===============================================================================
+Archivo: prueba_conexion.py
+
+Descripción:
+Este archivo se utiliza para verificar la conexión entre la aplicación y el
+sistema SAP. Además de validar la autenticación, realiza una consulta de prueba
+mediante la función RFC_READ_TABLE para comprobar que es posible acceder a la
+información de una tabla específica.
+
+Funcionalidades principales:
+- Carga las credenciales de conexión desde el archivo .env.
+- Establece una conexión con el servidor SAP utilizando la librería PyRFC.
+- Ejecuta una consulta de prueba sobre una tabla de SAP.
+- Aplica un filtro para consultar únicamente los registros del año indicado.
+- Limita la cantidad de registros devueltos para validar la conexión.
+- Muestra en consola los datos obtenidos.
+
+Objetivo:
+Comprobar que la configuración, las credenciales y la comunicación con SAP
+funcionan correctamente antes de ejecutar el proceso completo de extracción.
+
+===============================================================================
+"""
 import os
 os.add_dll_directory(r"C:\nwrfcsdk\lib")
 
