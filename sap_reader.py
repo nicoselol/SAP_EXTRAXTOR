@@ -1,3 +1,37 @@
+"""
+===============================================================================
+Archivo: sap_reader.py
+
+Descripción:
+Este archivo contiene la lógica encargada de consultar información desde SAP
+utilizando la función RFC_READ_TABLE. Debido a la gran cantidad de columnas de
+la tabla, los campos se dividen en grupos para evitar las limitaciones de la
+RFC y posteriormente se reconstruyen los registros completos.
+
+Funcionalidades principales:
+- Define los grupos de campos que serán consultados en SAP.
+- Realiza consultas a la tabla SAP por:
+    * Año.
+    * Mes.
+    * Rango de meses.
+- Obtiene los datos de forma paginada mediante ROWCOUNT y ROWSKIPS.
+- Calcula y reporta el progreso de la extracción por grupos.
+- Consolida la información obtenida de cada grupo para reconstruir cada
+  registro completo.
+- Utiliza el módulo sap_client.py para establecer la conexión con SAP.
+
+Flujo general:
+1. Se establece la conexión con SAP.
+2. Se consulta la tabla solicitada aplicando los filtros indicados.
+3. Los campos se leen en grupos para evitar exceder el límite de la RFC.
+4. Se recuperan todos los registros mediante paginación.
+5. Se unen los grupos de información para formar cada registro completo.
+6. Los datos consolidados son devueltos al módulo principal para su
+   almacenamiento en la base de datos.
+
+===============================================================================
+"""
+
 from sap_client import conectar_sap
 
 
